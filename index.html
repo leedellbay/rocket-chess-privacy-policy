@@ -63,7 +63,7 @@ code { background: var(--card); padding: .1rem .35rem; border-radius: 4px;
 <p class="sub">Rocket Chess — a chess game played on three stacked boards</p>
 <p class="dates">
   Published by Lee Dell Bay Innovation ·
-  Effective <time datetime="2026-08-24">24 August 2026</time>
+  Effective <time datetime="2026-08-27">27 August 2026</time>
 </p>
 
 <p>This policy explains what happens to information when you use
@@ -90,7 +90,52 @@ the same, and only the second one involves anybody outside your device.</p>
 address. It has no analytics, no crash-reporting service, no advertising
 identifiers of its own, and no in-app purchases.</p>
 
-<h2 id="admob">2. Information Google AdMob may collect and process</h2>
+<h2 id="online">2. Online and local-network multiplayer</h2>
+
+<p>Rocket Chess can also be played online: one player hosts and gets a short
+room code, and a friend enters that code on their own device to join. This is
+entirely opt-in &mdash; nothing described in this section happens unless you
+actively choose &ldquo;Play online&rdquo; and either host or join a game.</p>
+
+<p>Making that connection work requires a relay reachable from both devices,
+since two phones on different networks generally cannot reach each other
+directly. Rocket Chess uses <strong>Supabase</strong>, a third-party realtime
+messaging service, for this and nothing else &mdash; there is no database
+behind it and no account is created for you.</p>
+
+<div class="wrap">
+<table>
+  <tr><th>What</th><th>Why</th></tr>
+  <tr>
+    <td>The display name you chose on your device</td>
+    <td>So the other player (and any spectators) know who they are playing</td>
+  </tr>
+  <tr>
+    <td>Your moves and game setup choices</td>
+    <td>So the other device can show the same game in progress</td>
+  </tr>
+  <tr>
+    <td>Connection metadata (IP address, as with any internet connection)</td>
+    <td>Required to deliver the messages above at all</td>
+  </tr>
+</table>
+</div>
+
+<ul>
+  <li>Messages are relayed only for the duration of a game. Rooms are not
+      persisted once the game ends or the room is closed &mdash; there is no
+      Postgres database or other storage behind this feature, only a
+      transient realtime channel.</li>
+  <li>Supabase acts as an independent processor for this traffic. Its
+      handling of it is governed by its own policy, not this one:
+      <a href="https://supabase.com/privacy" rel="noopener"
+      target="_blank">Supabase Privacy Policy</a>.</li>
+  <li>This feature has no access to the information described in
+      section&nbsp;1, and vice versa &mdash; your local players, settings and
+      statistics are never sent to Supabase.</li>
+</ul>
+
+<h2 id="admob">3. Information Google AdMob may collect and process</h2>
 
 <p>The app shows advertisements supplied by Google AdMob. To do that, Google's
 advertising software runs inside the app and collects information
@@ -145,7 +190,7 @@ is governed by Google&rsquo;s own terms, not by this policy:</p>
 <p>The advertising software has no access to the information described in
 section&nbsp;1. It cannot read your games, statistics or settings.</p>
 
-<h2 id="advertising">3. Advertising and personalised advertising</h2>
+<h2 id="advertising">4. Advertising and personalised advertising</h2>
 
 <p>Ads may be <em>personalised</em> — chosen using information Google holds
 about your interests and previous activity — or <em>non-personalised</em>,
@@ -163,21 +208,21 @@ chosen using little more than the current context and your rough location.</p>
       advertising from the app, and it does not stop you using any part of
       the app.</li>
   <li><strong>Elsewhere</strong>, ads may be personalised by default, subject
-      to the controls in section&nbsp;10, which you can use at any time.</li>
+      to the controls in section&nbsp;11, which you can use at any time.</li>
 </ul>
 
 <p>We do not sell your personal information. We do not build advertising
 profiles ourselves and we receive no personal information from Google — only
 aggregate figures about how many ads were shown and what they earned.</p>
 
-<h2 id="identifiers">4. Device identifiers, IP address, approximate location
+<h2 id="identifiers">5. Device identifiers, IP address, approximate location
     and diagnostic data</h2>
 
 <p>To be explicit about the four categories people most often ask about:</p>
 
 <ul>
   <li><strong>Device identifiers.</strong> The advertising identifier
-      described in section&nbsp;2 is collected by Google&rsquo;s advertising
+      described in section&nbsp;3 is collected by Google&rsquo;s advertising
       software. It is resettable, and deleting it is a setting on your device.
       The app does not create or store any identifier of its own.</li>
   <li><strong>IP address.</strong> Your IP address is visible to Google
@@ -195,12 +240,12 @@ aggregate figures about how many ads were shown and what they earned.</p>
       them.</li>
 </ul>
 
-<h2 id="use">5. How information is used</h2>
+<h2 id="use">6. How information is used</h2>
 
 <ul>
   <li>Information described in section&nbsp;1 is used only to make the app
       work for you on your device.</li>
-  <li>Information described in section&nbsp;2 is used by Google to select,
+  <li>Information described in section&nbsp;3 is used by Google to select,
       deliver, cap and measure advertising, and to detect fraudulent or
       invalid ad traffic.</li>
   <li>We use aggregate advertising statistics to understand how the app is
@@ -211,11 +256,11 @@ aggregate figures about how many ads were shown and what they earned.</p>
 <p>We do not use your information to make automated decisions that
 significantly affect you, and we do not profile you.</p>
 
-<h2 id="sharing">6. Service providers and third-party sharing</h2>
+<h2 id="sharing">7. Service providers and third-party sharing</h2>
 
 <p>The only third party involved in the app is <strong>Google</strong>, as the
 supplier of AdMob advertising and, in the regions where it applies, the
-consent form. Google may share the information described in section&nbsp;2
+consent form. Google may share the information described in section&nbsp;3
 with its advertising partners in order to serve and measure ads.</p>
 
 <p>We share nothing else, with anyone.
@@ -223,17 +268,17 @@ We do not sell, rent or trade personal information. We may disclose
 information if we are legally required to, though in practice we hold almost
 nothing that could be disclosed.</p>
 
-<h2 id="retention">7. Data retention and deletion</h2>
+<h2 id="retention">8. Data retention and deletion</h2>
 
 <p>Your settings and game history stay on your device until you delete them. The app lets you clear a player's game history, and uninstalling the app removes everything it stored. Because we never hold a copy, there is nothing for us to delete.</p>
 
 <p>Information collected by Google&rsquo;s advertising software is retained by
 Google under its own retention schedules, which are described in the Google
 Privacy Policy linked above. You can reset or delete your advertising
-identifier at any time using the steps in section&nbsp;10, which breaks the
+identifier at any time using the steps in section&nbsp;11, which breaks the
 link between past advertising activity and your device.</p>
 
-<h2 id="children">8. Children&rsquo;s privacy</h2>
+<h2 id="children">9. Children&rsquo;s privacy</h2>
 
 <p>This app is not directed to children. It is intended for users aged 13 and
 over, and we do not knowingly collect personal information from children under
@@ -246,7 +291,7 @@ In practice the app collects nothing from anyone that we could hold or delete;
 the relevant information would sit with Google, and we will help you direct a
 request there.</p>
 
-<h2 id="security">9. Security</h2>
+<h2 id="security">10. Security</h2>
 
 <ul>
   <li>Information stored on your device is held in the app&rsquo;s private
@@ -261,7 +306,7 @@ request there.</p>
 <p>No method of storage or transmission is completely secure, and we cannot
 guarantee absolute security.</p>
 
-<h2 id="choices">10. User choices and advertising controls</h2>
+<h2 id="choices">11. User choices and advertising controls</h2>
 
 <p>You have real controls here, and they work whether or not we are involved:</p>
 
@@ -291,7 +336,7 @@ delete or export personal information, or to object to its processing. Since
 we hold no personal information about you, most such requests are best
 directed to Google. Write to us and we will point you to the right place.</p>
 
-<h2 id="changes">11. Changes to this policy</h2>
+<h2 id="changes">12. Changes to this policy</h2>
 
 <p>We may update this policy — for example if the app gains a feature that
 handles information differently. When we do, we will change the effective date
@@ -299,7 +344,7 @@ at the top and publish the new version at this address. Significant changes
 will also be noted in the app&rsquo;s store listing release notes. Please check
 back from time to time.</p>
 
-<h2 id="contact">12. Contact</h2>
+<h2 id="contact">13. Contact</h2>
 
 <p>Questions about this policy, or about privacy in this app:</p>
 
@@ -308,10 +353,10 @@ back from time to time.</p>
 
 <p>We aim to answer within 30 days.</p>
 
-<h2 id="effective">13. Effective date</h2>
+<h2 id="effective">14. Effective date</h2>
 
 <p>This policy is effective from
-<time datetime="2026-08-24">24 August 2026</time>. It applies to
+<time datetime="2026-08-27">27 August 2026</time>. It applies to
 Rocket Chess, package <code>com.rocketchess.rocket_chess</code>, on all platforms
 where it is published.</p>
 
