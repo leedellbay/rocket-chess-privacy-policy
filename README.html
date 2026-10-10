@@ -6,56 +6,61 @@
 </head>
 
 <body>
-  <pre># Rocket Chess — the account
+  <pre># Rocket Chess — player profiles
 
-Written for two readers: an App Store or Play reviewer checking how account
+Written for two readers: an App Store or Play reviewer checking how profile
 creation, editing and deletion work, and anyone using the app who wants to
 know the same thing.
 
-## There is no account, in the usual sense
+## A player profile is not a user account
 
-Rocket Chess has no sign-in, no email or password, and no server-side account
-of ours. What the app calls a **player** is a name kept in the app's private
-storage on the device — nothing more. More than one player can exist side by
+Rocket Chess has no user accounts: no sign-in, no email or password, and
+nothing held on a server of ours. A **player profile** is only a name you
+choose, kept in the app's private storage on the device. It exists for two
+reasons: to keep your own game statistics, and to show the other player who
+you are in a network game. Nothing more. More than one player can exist side by
 side on the same device (that's what pass-and-play needs), and one of them is
 the one currently "playing."
 
 Playing online (see [https://leedellbay.github.io/rocket-chess-privacy-policy/ §2](privacy policy))
 does not change this: hosting or joining a game uses a player you already
-created on the device. It does not create a separate account anywhere, and
-nothing about a player is stored on the relay — see the privacy policy for
-what online play does send, and for how long.
+created on the device. It does not create a profile or account anywhere else. Online
+play offers two ways to connect — over Supabase (a third-party relay) or
+directly over the local network (LAN) — and neither stores anything about a
+player: the Supabase relay only ever sees display names and moves passing
+through, for as long as the game is open, and a LAN game never leaves the
+local network at all. See the privacy policy for details.
 
-## Creating a player
+## Creating a player profile
 
-From the hub screen, the card labelled **"Your account"** (or **"Add a
-player"** once one exists) opens a name dialog:
+From the hub screen, the profile icon (tooltip **"Player profile"**) and then
+**"New profile"** open a name dialog:
 
 - 1–24 characters
 - must be unique on that device (case-insensitive)
 - stored only in the app's local storage; nothing is sent anywhere to create
   it
 
-Creating a player selects it as the current one immediately.
+Creating a profile selects it as the current one immediately.
 
-## Editing a player
+## Editing a player profile
 
-Tap **"Playing as \<name\>"** → **"Switch, rename, or add someone else"** to
-open "Who is playing on this device." The pencil icon next to a player opens
+Tap **"Playing as \&lt;name\&gt;"** → **"Switch, rename, or add someone else"** to
+open "Profiles on this device." The pencil icon next to a player opens
 **"Change name,"** which is the only thing about a player that can be
-edited — a player has no other profile fields (an avatar initial and colour
+edited — a profile has no other fields (an avatar initial and colour
 are derived automatically from the name, not set separately).
 
 Preferences — theme, board and piece colours, text size, difficulty, and so
 on — travel with whichever player is current and switch automatically when
-you switch players, but changing them is not an account edit: the account
+you switch players, but changing them is not an account edit: the profile
 itself is just the name.
 
-## Deleting a player
+## Deleting a player profile
 
 Same sheet, trash icon next to a player, which asks for confirmation:
 
-> Remove \<name\>? Their games and statistics go too. This cannot be undone.
+&gt; Remove \&lt;name\&gt;? Their games and statistics go too. This cannot be undone.
 
 Confirming removes, immediately and only on the device:
 
@@ -71,8 +76,8 @@ to also delete — removing a player here is the entire deletion process.
 
 A current player can be deselected without deleting them — **"Nobody, for
 now"** in the same sheet. Games played this way aren't attributed to anyone
-and don't count toward any statistics. This is not account deletion, just
-playing without one chosen.
+and don't count toward any statistics. This is not account deletion, because there are no
+accounts; it is just playing without a profile chosen.
 
 ## Deleting everything at once
 
@@ -86,8 +91,6 @@ There is no cloud copy for us to also delete on our end.
 `lib/ui/hub_screen.dart` — the dialogs and the "manage players" sheet
 described above. Related policy language: `privacy policy`, sections 1
 and 8.
-
-
-    </pre>
+</pre>
   </body>
 </html>
